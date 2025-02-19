@@ -1,55 +1,66 @@
-# FTTH Calculator
+# Kalkulator Estimasi Kebutuhan Material FTTH
 
-FTTH Calculator adalah aplikasi berbasis GUI yang dibangun menggunakan Python dan Tkinter. Aplikasi ini dirancang untuk membantu pengguna dalam menghitung kebutuhan material untuk instalasi Fiber To The Home (FTTH). 
+## Deskripsi
+Program ini adalah kalkulator yang dirancang untuk menghitung kebutuhan material dalam proyek Fiber To The Home (FTTH). Pengguna dapat memasukkan jumlah rumah yang akan dilayani, memilih jenis kabel dan FDT (Fiber Distribution Terminal), dan program akan menghitung jumlah FAT (Fiber Access Terminal), kabel, dan FDT yang dibutuhkan.
 
-## Fitur Utama
+## Fitur
+- Menghitung jumlah FAT yang dibutuhkan berdasarkan jumlah rumah.
+- Menghitung jumlah kabel yang dibutuhkan berdasarkan jenis kabel yang dipilih.
+- Menghitung jumlah FDT yang dibutuhkan berdasarkan jenis FDT yang dipilih.
+- Menampilkan sisa core setelah pemakaian dan jumlah rumah yang masih bisa dicover.
+- Menyimpan hasil kalkulasi ke dalam file teks.
 
-- **Input Jumlah Rumah**: Pengguna dapat memasukkan jumlah rumah yang akan dilayani.
-- **Pemilihan Jenis Kabel**: Pengguna dapat memilih antara kabel 24 Core atau 48 Core.
-- **Pemilihan Jenis FDT**: Pengguna dapat memilih antara FDT 48 atau FDT 72.
-- **Perhitungan Kebutuhan Material**: Aplikasi menghitung jumlah FAT, kabel, dan FDT yang dibutuhkan berdasarkan input pengguna.
-- **Sisa Core dan Rekomendasi**: Menampilkan sisa core yang tersedia dan memberikan rekomendasi penggunaan jenis kabel yang lebih efisien.
-- **Simpan Hasil**: Pengguna dapat menyimpan hasil perhitungan ke dalam file teks.
+## Jenis Kabel yang Didukung
+- 12 Core
+- 24 Core
+- 36 Core
+- 48 Core
+- 72 Core
+- 96 Core
+- 144 Core
+- 192 Core
+- 216 Core
+- 288 Core
 
-## Cara Menggunakan
+## Jenis FDT yang Didukung
+- FDT 48
+- FDT 72
+- FDT 96
+- FDT 144
+- FDT 288
 
-1. Jalankan aplikasi dengan menjalankan file `FTTH Calculator.py`.
+## Cara Penggunaan
+1. Jalankan program.
 2. Masukkan jumlah rumah yang ingin dilayani.
-3. Pilih jenis kabel dan FDT yang diinginkan.
-4. Klik tombol "Hitung Kebutuhan Material" untuk mendapatkan hasil perhitungan.
-5. Jika diinginkan, simpan hasil perhitungan ke dalam file teks.
+3. Pilih jenis kabel dari dropdown yang tersedia.
+4. Pilih jenis FDT dari dropdown yang tersedia.
+5. Klik tombol "Hitung Kebutuhan Material" untuk melakukan perhitungan.
+6. Hasil perhitungan akan ditampilkan dalam jendela pop-up.
+7. Anda dapat memilih untuk menyimpan hasil kalkulasi ke dalam file teks.
 
-## Prasyarat
-
+## Persyaratan
 - Python 3.x
 - Tkinter (biasanya sudah terinstal dengan Python)
 
 ## Instalasi
-
-1. Clone repositori ini:
+1. Pastikan Python 3.x terinstal di sistem Anda.
+2. Salin kode program ke dalam file Python (misalnya, `FTTH_Calculator.py`).
+3. Jalankan program menggunakan perintah:
    ```bash
-   git clone https://github.com/username/repo.git
-   ```
-2. Navigasi ke direktori proyek:
-   ```bash
-   cd repo
-   ```
-3. Jalankan aplikasi:
-   ```bash
-   ## python FTTH Calculator.py
-   
+   python FTTH_Calculator.py
    ```
 
-## Pengembang
-
-- **Nama**: Syaiful Wachid
-- **Posisi**: Senior Project Designer
-- **Perusahaan**: Fiberhome Indonesia
-- **Tanggal**: 27 Desember 2024
+## Kontribusi
+Jika Anda ingin berkontribusi pada proyek ini, silakan fork repositori ini dan kirim pull request dengan perubahan yang diinginkan.
 
 ## Lisensi
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
-Proyek ini tidak memiliki lisensi khusus. Silakan gunakan sesuai kebutuhan Anda.
+```bash
+
+import tkinter as tk
+from tkinter import messagebox, ttk
+from tkinter import filedialog
 
 # Fungsi untuk menghitung kebutuhan material
 def calculate_material():
@@ -65,12 +76,36 @@ def calculate_material():
         fat_needed = (num_houses + 15) // 16  # 1 FAT bisa mengcover 16 rumah
         
         # Hitung jumlah kabel yang dibutuhkan
-        if selected_cable == "24 Core":
+        if selected_cable == "12 Core":
+            cable_needed = (fat_needed + 5) // 6  # 1 kabel 12 core untuk 5 FAT
+            total_cores = cable_needed * 12
+        elif selected_cable == "24 Core":
             cable_needed = (fat_needed + 9) // 10  # 1 kabel 24 core untuk 10 FAT
             total_cores = cable_needed * 24
+        elif selected_cable == "36 Core":  # Tambahan untuk kabel 36 Core
+            cable_needed = (fat_needed + 14) // 15  # 1 kabel 36 core untuk 15 FAT
+            total_cores = cable_needed * 36
         elif selected_cable == "48 Core":
             cable_needed = (fat_needed + 19) // 20  # 1 kabel 48 core untuk setiap 20 FAT
             total_cores = cable_needed * 48
+        elif selected_cable == "72 Core":  # Tambahan untuk kabel 72 Core
+            cable_needed = (fat_needed + 29) // 30  # 1 kabel 72 core untuk 30 FAT
+            total_cores = cable_needed * 72
+        elif selected_cable == "96 Core":  # Tambahan untuk kabel 96 Core
+            cable_needed = (fat_needed + 39) // 40  # 1 kabel 96 core untuk 40 FAT
+            total_cores = cable_needed * 96
+        elif selected_cable == "144 Core":  # Tambahan untuk kabel 144 Core
+            cable_needed = (fat_needed + 59) // 60  # 1 kabel 144 core untuk 60 FAT
+            total_cores = cable_needed * 144
+        elif selected_cable == "192 Core":  # Tambahan untuk kabel 192 Core
+            cable_needed = (fat_needed + 79) // 80  # 1 kabel 192 core untuk 80 FAT
+            total_cores = cable_needed * 192
+        elif selected_cable == "216 Core":  # Tambahan untuk kabel 216 Core
+            cable_needed = (fat_needed + 89) // 90  # 1 kabel 216 core untuk 90 FAT
+            total_cores = cable_needed * 216
+        elif selected_cable == "288 Core":  # Tambahan untuk kabel 288 Core
+            cable_needed = (fat_needed + 119) // 120  # 1 kabel 288 core untuk 120 FAT
+            total_cores = cable_needed * 288
         
         # Hitung jumlah FDT yang dibutuhkan
         if selected_fdt == "FDT 48":
@@ -78,6 +113,12 @@ def calculate_material():
             fdt_cores = 48
         elif selected_fdt == "FDT 72":
             fdt_needed = (fat_needed + 29) // 30  # 1 FDT 72 untuk setiap 30 FAT
+        elif selected_fdt == "FDT 96":  # Tambahan untuk FDT 96
+            fdt_needed = (fat_needed + 39) // 40  # 1 FDT 96 untuk setiap 40 FAT
+        elif selected_fdt == "FDT 144":  # Tambahan untuk FDT 144
+            fdt_needed = (fat_needed + 59) // 60  # 1 FDT 144 untuk setiap 60 FAT
+        elif selected_fdt == "FDT 288":  # Tambahan untuk FDT 288
+            fdt_needed = (fat_needed + 119) // 120  # 1 FDT 288 untuk setiap 120 FAT
         
         # Hitung sisa core
         used_cores = fat_needed * 2  # 2 core per FAT
@@ -127,7 +168,7 @@ def calculate_material():
         
         # Tanyakan apakah ingin menyimpan hasil
         if messagebox.askyesno("Simpan Hasil", "Apakah Anda ingin menyimpan hasil kalkulasi?"):
-            save_to_file(result)  # Perbaikan: Tambahkan tanda kurung yang hilang di sini
+            save_to_file(result)
     
     except ValueError:
         messagebox.showerror("Input Error", "Harap masukkan jumlah rumah yang valid.")
@@ -160,7 +201,7 @@ cable_var = tk.StringVar()
 label_cable = tk.Label(root, text="Pilih jenis kabel:")
 label_cable.pack(pady=10)
 
-cable_options = ["24 Core", "48 Core"]
+cable_options = ["12 Core", "24 Core", "36 Core", "48 Core", "72 Core", "96 Core", "144 Core", "192 Core", "216 Core", "288 Core"]  # Tambahkan semua opsi kabel baru
 cable_dropdown = ttk.Combobox(root, textvariable=cable_var, values=cable_options)
 cable_dropdown.pack(pady=5)
 cable_dropdown.current(0)  # Set default to first option
@@ -170,7 +211,7 @@ fdt_var = tk.StringVar()
 label_fdt = tk.Label(root, text="Pilih jenis FDT:")
 label_fdt.pack(pady=10)
 
-fdt_options = ["FDT 48", "FDT 72"]
+fdt_options = ["FDT 48", "FDT 72", "FDT 96", "FDT 144", "FDT 288"]  # Tambahkan semua opsi FDT baru
 fdt_dropdown = ttk.Combobox(root, textvariable=fdt_var, values=fdt_options)
 fdt_dropdown.pack(pady=5)
 fdt_dropdown.current(0)  # Set default to first option
@@ -187,5 +228,7 @@ label_position.pack(anchor='w', pady=0)  # Rata kiri
 label_company = tk.Label(root, text="  Fiberhome Indonesia")
 label_company.pack(anchor='w', pady=0)  # Rata kiri
 
+
 # Menjalankan aplikasi
 root.mainloop()
+```
