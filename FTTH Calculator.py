@@ -16,12 +16,36 @@ def calculate_material():
         fat_needed = (num_houses + 15) // 16  # 1 FAT bisa mengcover 16 rumah
         
         # Hitung jumlah kabel yang dibutuhkan
-        if selected_cable == "24 Core":
+        if selected_cable == "12 Core":
+            cable_needed = (fat_needed + 5) // 6  # 1 kabel 12 core untuk 5 FAT
+            total_cores = cable_needed * 12
+        elif selected_cable == "24 Core":
             cable_needed = (fat_needed + 9) // 10  # 1 kabel 24 core untuk 10 FAT
             total_cores = cable_needed * 24
+        elif selected_cable == "36 Core":  # Tambahan untuk kabel 36 Core
+            cable_needed = (fat_needed + 14) // 15  # 1 kabel 36 core untuk 15 FAT
+            total_cores = cable_needed * 36
         elif selected_cable == "48 Core":
             cable_needed = (fat_needed + 19) // 20  # 1 kabel 48 core untuk setiap 20 FAT
             total_cores = cable_needed * 48
+        elif selected_cable == "72 Core":  # Tambahan untuk kabel 72 Core
+            cable_needed = (fat_needed + 29) // 30  # 1 kabel 72 core untuk 30 FAT
+            total_cores = cable_needed * 72
+        elif selected_cable == "96 Core":  # Tambahan untuk kabel 96 Core
+            cable_needed = (fat_needed + 39) // 40  # 1 kabel 96 core untuk 40 FAT
+            total_cores = cable_needed * 96
+        elif selected_cable == "144 Core":  # Tambahan untuk kabel 144 Core
+            cable_needed = (fat_needed + 59) // 60  # 1 kabel 144 core untuk 60 FAT
+            total_cores = cable_needed * 144
+        elif selected_cable == "192 Core":  # Tambahan untuk kabel 192 Core
+            cable_needed = (fat_needed + 79) // 80  # 1 kabel 192 core untuk 80 FAT
+            total_cores = cable_needed * 192
+        elif selected_cable == "216 Core":  # Tambahan untuk kabel 216 Core
+            cable_needed = (fat_needed + 89) // 90  # 1 kabel 216 core untuk 90 FAT
+            total_cores = cable_needed * 216
+        elif selected_cable == "288 Core":  # Tambahan untuk kabel 288 Core
+            cable_needed = (fat_needed + 119) // 120  # 1 kabel 288 core untuk 120 FAT
+            total_cores = cable_needed * 288
         
         # Hitung jumlah FDT yang dibutuhkan
         if selected_fdt == "FDT 48":
@@ -29,6 +53,12 @@ def calculate_material():
             fdt_cores = 48
         elif selected_fdt == "FDT 72":
             fdt_needed = (fat_needed + 29) // 30  # 1 FDT 72 untuk setiap 30 FAT
+        elif selected_fdt == "FDT 96":  # Tambahan untuk FDT 96
+            fdt_needed = (fat_needed + 39) // 40  # 1 FDT 96 untuk setiap 40 FAT
+        elif selected_fdt == "FDT 144":  # Tambahan untuk FDT 144
+            fdt_needed = (fat_needed + 59) // 60  # 1 FDT 144 untuk setiap 60 FAT
+        elif selected_fdt == "FDT 288":  # Tambahan untuk FDT 288
+            fdt_needed = (fat_needed + 119) // 120  # 1 FDT 288 untuk setiap 120 FAT
         
         # Hitung sisa core
         used_cores = fat_needed * 2  # 2 core per FAT
@@ -111,7 +141,7 @@ cable_var = tk.StringVar()
 label_cable = tk.Label(root, text="Pilih jenis kabel:")
 label_cable.pack(pady=10)
 
-cable_options = ["24 Core", "48 Core"]
+cable_options = ["12 Core", "24 Core", "36 Core", "48 Core", "72 Core", "96 Core", "144 Core", "192 Core", "216 Core", "288 Core"]  # Tambahkan semua opsi kabel baru
 cable_dropdown = ttk.Combobox(root, textvariable=cable_var, values=cable_options)
 cable_dropdown.pack(pady=5)
 cable_dropdown.current(0)  # Set default to first option
@@ -121,7 +151,7 @@ fdt_var = tk.StringVar()
 label_fdt = tk.Label(root, text="Pilih jenis FDT:")
 label_fdt.pack(pady=10)
 
-fdt_options = ["FDT 48", "FDT 72"]
+fdt_options = ["FDT 48", "FDT 72", "FDT 96", "FDT 144", "FDT 288"]  # Tambahkan semua opsi FDT baru
 fdt_dropdown = ttk.Combobox(root, textvariable=fdt_var, values=fdt_options)
 fdt_dropdown.pack(pady=5)
 fdt_dropdown.current(0)  # Set default to first option
